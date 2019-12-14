@@ -13,15 +13,16 @@ public class Board : MonoBehaviour
 
     void Start()
     {
+        RandomizeBoard();
+    }
+
+    public void RandomizeBoard()
+    {
+        boardTiles = new Tile[4, 6];
         foreach (Tile tile in tiles)
         {
             boardTiles[tile.y - 2, tile.x - 1] = tile;
         }
-        RandomizeBoard();
-    }
-
-    void RandomizeBoard()
-    {
         foreach (Tile tile in tiles)
         {
             tile.Number = RandomizeNumber();
