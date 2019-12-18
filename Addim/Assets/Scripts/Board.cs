@@ -138,7 +138,7 @@ public class Board : MonoBehaviour
 
     public void SetTileEmptyState(Vector2 position, bool empty)
     {
-        boardTiles[(int)position.y - 2, (int)position.x - 1].Empty = false;
+        boardTiles[(int)position.y - 2, (int)position.x - 1].Empty = empty;
     }
 
     public bool ReturnTileEmptyState(Vector2 position)
