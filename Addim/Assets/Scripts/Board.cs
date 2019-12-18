@@ -103,10 +103,6 @@ public class Board : MonoBehaviour
 
     public void DisplaySurroundingTiles(Vector2 position)
     {
-        foreach (Tile tile in tiles)
-        {
-            tile.ResetColor();
-        }
         for (int y = (int)position.y - 1; y <= position.y + 1; y++)
         {
             for (int x = (int)position.x - 1; x <= position.x + 1; x++)
@@ -130,5 +126,23 @@ public class Board : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ResetTileColors()
+    {
+        foreach (Tile tile in tiles)
+        {
+            tile.ResetColor();
+        }
+    }
+
+    public void SetTileEmptyState(Vector2 position, bool empty)
+    {
+        boardTiles[(int)position.y - 2, (int)position.x - 1].Empty = false;
+    }
+
+    public bool ReturnTileEmptyState(Vector2 position)
+    {
+        return boardTiles[(int)position.y - 2, (int)position.x - 1].Empty;
     }
 }

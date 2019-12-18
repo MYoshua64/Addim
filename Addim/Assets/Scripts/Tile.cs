@@ -40,6 +40,18 @@ public class Tile : MonoBehaviour
             tileNumberUpper.text = tileNumberLower.text = value.ToString();
         }
     }
+    bool empty = true;
+    public bool Empty
+    {
+        get
+        {
+            return empty;
+        }
+        set
+        {
+            empty = value;
+        }
+    }
 
 
     private void Awake()
