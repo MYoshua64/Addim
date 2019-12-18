@@ -145,8 +145,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 901082547
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e22104d72e5e50240be4bd7b252d4629, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -173,7 +173,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileNumberUpper: {fileID: 7810034094674774756}
   tileNumberLower: {fileID: 2287827796172581946}
-  board: {fileID: 11400000, guid: 2d7014c057b8d4543872525fc269730f, type: 2}
 --- !u!1 &3695204619969441374
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +231,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 901082547
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &2949369713929120518
