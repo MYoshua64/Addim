@@ -16,64 +16,46 @@ public class Board : MonoBehaviour
         RandomizeBoard();
     }
 
-    public void RandomizeBoard()
-    {
-        boardTiles = new Tile[4, 6];
-        foreach (Tile tile in tiles)
-        {
-            boardTiles[tile.y - 2, tile.x - 1] = tile;
-        }
-        foreach (Tile tile in tiles)
-        {
-            tile.Number = RandomizeNumber();
-        }
-        for (int y = 0; y < boardTiles.GetLength(0); y++)
-        {
-            for (int x = 0; x < boardTiles.GetLength(1); x++)
-            {
-                RandomizeColor(boardTiles[y, x]);
-            }
-        }
-    }
-
     private void RandomizeColor(Tile tile)
     {
-        int randomNum = 0;
+        int randomNum;
         bool valid = false;
         do
         {
             randomNum = UnityEngine.Random.Range(0, 2);
-            if (IsValid(randomNum, tile))
+            if (colorLimit[randomNum] < 12) //&&
+                //GetColorInRow(possibleColors[randomNum], tile.y) < 4 &&
+                //GetColorInColumn(possibleColors[randomNum], tile.x) < 2)
             {
-                valid = true;
                 colorLimit[randomNum]++;
-            }
-
+                valid = true;
+           }
         } while (!valid);
-        tile.color = possibleColors[randomNum];
+         tile.color = possibleColors[randomNum];
     }
-
-    private bool IsValid(int randomNum, Tile tile)
-    {
-        return colorLimit[randomNum] < 12 && GetColorInRow(possibleColors[randomNum], tile.y) < 4 &&
-            GetColorInColumn(possibleColors[randomNum], tile.x) < 2;
-    }
-
+    
     private int RandomizeNumber()
     {
-        int randomNum = 0;
+        int randomNum;
         bool valid = false;
         do
         {
             randomNum = UnityEngine.Random.Range(1, 6);
             if (numberLimit[randomNum - 1] < 5)
             {
-                valid = true;
                 numberLimit[randomNum - 1]++;
+                valid = true;
             }
         } while (!valid);
+        Debug.Log(numberLimit[randomNum - 1]);
         return randomNum;
     }
+
+    //private bool IsValid(int randomNum, Tile tile)
+    //{
+    //    return colorLimit[randomNum] < 12 && GetColorInRow(possibleColors[randomNum], tile.y) < 4 &&
+    //        GetColorInColumn(possibleColors[randomNum], tile.x) < 2;
+    //}
 
     int GetColorInRow(Color color, int y)
     {
@@ -87,7 +69,6 @@ public class Board : MonoBehaviour
         }
         return counter;
     }
-
     int GetColorInColumn(Color color, int x)
     {
         int counter = 0;
@@ -100,7 +81,6 @@ public class Board : MonoBehaviour
         }
         return counter;
     }
-
     public void DisplaySurroundingTiles(Vector2 position)
     {
         for (int y = (int)position.y - 1; y <= position.y + 1; y++)
@@ -118,16 +98,18 @@ public class Board : MonoBehaviour
                     {
                         checkedX = 1;
                     }
-                    if (x != position.x || y != position.y)
+                    for (int i = 0; i < 4; i++)
                     {
-                        Color tileColor = boardTiles[y - 2, checkedX - 1].color;
-                        boardTiles[y - 2, checkedX - 1].color = new Color32(255, 255, 0, 255);
+                        if (x != position.x || y != position.y)
+                        {
+                            Color tileColor = boardTiles[y - 2, checkedX - 1].color;
+                            boardTiles[y - 2, checkedX - 1].color = new Color32(255, 255, 0, 255);
+                        }
                     }
                 }
             }
         }
     }
-
     public void ResetTileColors()
     {
         foreach (Tile tile in tiles)
@@ -135,14 +117,31 @@ public class Board : MonoBehaviour
             tile.ResetColor();
         }
     }
-
     public void SetTileEmptyState(Vector2 position, bool empty)
     {
         boardTiles[(int)position.y - 2, (int)position.x - 1].Empty = empty;
     }
-
     public bool ReturnTileEmptyState(Vector2 position)
     {
         return boardTiles[(int)position.y - 2, (int)position.x - 1].Empty;
+    }
+    public void RandomizeBoard()
+    {
+        numberLimit = new int[5];
+        colorLimit = new int[2];
+        boardTiles = new Tile[4, 6];
+
+        foreach (Tile tile in tiles)
+        {
+            boardTiles[tile.y - 2, tile.x - 1] = tile;
+            tile.Number = RandomizeNumber();
+        }
+        for (int y = 0; y < boardTiles.GetLength(0); y++)
+        {
+            for (int x = 0; x < boardTiles.GetLength(1); x++)
+            {
+                RandomizeColor(boardTiles[y, x]);
+            }
+        }
     }
 }

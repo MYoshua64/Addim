@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Dice : MonoBehaviour
 {
     public GameObject [] Numbers = new GameObject [4];
-    private int [] DiceNumbers = new  int [4];
+    public int [] DiceNumbers = new  int [4];
     public GameObject buttonRoll;
     public GameObject ButtonPlay;
 
